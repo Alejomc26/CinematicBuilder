@@ -20,7 +20,6 @@ hangarPublish {
         id.set("hangar-project")
         apiKey.set(System.getenv("HANGAR_API_TOKEN"))
         platforms {
-            // TODO: Use the correct platform(s) for your plugin
             register(Platforms.PAPER) {
                 // TODO: If you're using ShadowJar, replace the jar lines with the appropriate task:
                 //   jar.set(tasks.shadowJar.flatMap { it.archiveFile })
