@@ -1,5 +1,6 @@
 package io.papermc.cinematicbuilder.command;
 
+import io.papermc.cinematicbuilder.CinematicBuilder;
 import io.papermc.cinematicbuilder.managers.CinematicManager;
 import io.papermc.cinematicbuilder.managers.PlayerManager;
 import io.papermc.cinematicbuilder.utils.Logger;
@@ -14,7 +15,7 @@ public class CommandListener implements CommandExecutor {
 
     private final CinematicManager cinematicManager;
     private final PlayerManager manager;
-    public CommandListener(PlayerManager manager, CinematicManager cinematicManager) {
+    public CommandListener(CinematicBuilder main, PlayerManager manager, CinematicManager cinematicManager) {
         this.cinematicManager = cinematicManager;
         this.manager = manager;
     }

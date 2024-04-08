@@ -11,10 +11,10 @@ import java.util.List;
 
 public class LocationParser {
 
-    public static void serializeLocations(ArrayList<Location> locations, String fileName) {
+    public static void serializeLocations(CinematicBuilder main, ArrayList<Location> locations, String fileName) {
 
         //Create file that will contain the locations
-        File file = new File(CinematicBuilder.getInstance().getDataFolder(), fileName + ".yml");
+        File file = new File(main.getDataFolder(), fileName + ".yml");
 
         //Create yaml config
         YamlConfiguration config = new YamlConfiguration();
@@ -31,10 +31,10 @@ public class LocationParser {
 
     }
 
-    public static Location[] deserializeLocations(String fileName) {
+    public static Location[] deserializeLocations(CinematicBuilder main, String fileName) {
 
         //Gets the file to deserialize
-        File file = new File(CinematicBuilder.getInstance().getDataFolder(), fileName + ".yml");
+        File file = new File(main.getDataFolder(), fileName + ".yml");
 
         //Creates the list that will contain all the locations
         List<Location> locations = new ArrayList<>();

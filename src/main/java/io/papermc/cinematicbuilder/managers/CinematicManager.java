@@ -15,8 +15,10 @@ import java.io.File;
 public class CinematicManager {
 
     private final PlayerManager manager;
-    public CinematicManager(PlayerManager manager) {
+    private final CinematicBuilder main;
+    public CinematicManager(CinematicBuilder main, PlayerManager manager) {
         this.manager = manager;
+        this.main = main;
     }
 
     public void start(Player player, String fileName) {
@@ -36,12 +38,12 @@ public class CinematicManager {
                     this.cancel();
                 }
             }
-        }.runTaskTimer(CinematicBuilder.getInstance(), 0, 1);
+        }.runTaskTimer(main, 0, 1);
     }
 
     public void deleteCinematic(Player player, String fileName) {
-        File file = new File(CinematicBuilder.getInstance().getDataFolder(), fileName + ".yml");
-        StringParser.removeString(fileName);
+        File file = new File(main.getDataFolder(), fileName + ".yml");
+        StringParser.removeString(main, fileName);
 
         if (file.delete()) {
             Logger.sendMessageToPlayer(player, fileName + " deleted successfully");
@@ -59,10 +61,10 @@ public class CinematicManager {
         player.teleport(teleportManager.getOriginalLocation());
 
         //Save the locations in a file
-        LocationParser.serializeLocations(teleportManager.getTeleportLocations(), teleportManager.getFileName());
+        LocationParser.serializeLocations(main, teleportManager.getTeleportLocations(), teleportManager.getFileName());
 
         //Add the file to the command completer
-        StringParser.addString(teleportManager.getFileName());
+        StringParser.addString(main, teleportManager.getFileName());
 
         //Remove the player from the manager
         this.manager.removePlayer(player);
@@ -85,7 +87,7 @@ public class CinematicManager {
 
     public void play(Player player, String cinematicName) {
         //Deserialize the locations into a list of locations
-        Location[] locations = LocationParser.deserializeLocations(cinematicName);
+        Location[] locations = LocationParser.deserializeLocations(main, cinematicName);
 
         //Creates the camera and makes the player spectate it
         Camera camera = new Camera(player.getLocation());
@@ -116,6 +118,6 @@ public class CinematicManager {
                 //Teleports the camera to the next location
                 camera.teleport(locations[currentLocationNumber++]);
             }
-        }.runTaskTimer(CinematicBuilder.getInstance(), 0, 1);
+        }.runTaskTimer(main, 0, 1);
     }
 }

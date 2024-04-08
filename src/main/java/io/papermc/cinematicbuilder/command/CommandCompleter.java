@@ -1,5 +1,6 @@
 package io.papermc.cinematicbuilder.command;
 
+import io.papermc.cinematicbuilder.CinematicBuilder;
 import io.papermc.cinematicbuilder.parser.StringParser;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -15,6 +16,10 @@ import java.util.List;
 
 public class CommandCompleter implements TabCompleter {
 
+    private final CinematicBuilder main;
+    public CommandCompleter(CinematicBuilder main) {
+        this.main = main;
+    }
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         List<String> subCommands = new ArrayList<>();
@@ -28,7 +33,7 @@ public class CommandCompleter implements TabCompleter {
 
         if (args.length == 2) {
             if (args[0].equalsIgnoreCase("play")) {
-                String[] names = StringParser.deserializeStrings();
+                String[] names = StringParser.deserializeStrings(this.main);
                 subCommands.addAll(Arrays.asList(names));
             }
         }

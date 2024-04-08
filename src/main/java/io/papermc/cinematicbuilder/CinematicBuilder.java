@@ -18,13 +18,13 @@ public final class CinematicBuilder extends JavaPlugin {
 
         //Create the player manager
         PlayerManager playerManager = new PlayerManager();
-        CinematicManager cinematicManager = new CinematicManager(playerManager);
+        CinematicManager cinematicManager = new CinematicManager(this, playerManager);
 
         //Register the command and pass the player manager
-        this.getCommand("cinematicbuilder").setExecutor(new CommandListener(playerManager, cinematicManager));
+        this.getCommand("cinematicbuilder").setExecutor(new CommandListener(this, playerManager, cinematicManager));
 
         //Register the tab completer
-        this.getCommand("cinematicbuilder").setTabCompleter(new CommandCompleter());
+        this.getCommand("cinematicbuilder").setTabCompleter(new CommandCompleter(this));
 
         //Register the event listener
         this.getServer().getPluginManager().registerEvents(new EventListener(playerManager, cinematicManager), this);

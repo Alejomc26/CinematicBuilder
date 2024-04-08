@@ -2,11 +2,11 @@ import io.papermc.hangarpublishplugin.model.Platforms
 
 plugins {
     id("java")
-    id("io.papermc.hangar-publish-plugin") version "0.1.0"
+    id("io.papermc.hangar-publish-plugin") version "0.1.2"
 }
 
 group = "io.github.alejomc26"
-version = "1.0"
+version = "1.1"
 
 repositories {
     mavenCentral()
@@ -17,9 +17,11 @@ hangarPublish {
     publications.register("plugin") {
         version.set(project.version as String)
         channel.set("Snapshot") // We're using the 'Snapshot' channel
-        id.set("hangar-project")
-        apiKey.set(System.getenv("HANGAR_API_TOKEN"))
+        // TODO: Edit the project name to match your Hangar project
+        id.set("CinematicBuilder")
+        apiKey.set(System.getProperty("HANGAR_API_TOKEN"))
         platforms {
+            // TODO: Use the correct platform(s) for your plugin
             register(Platforms.PAPER) {
                 // TODO: If you're using ShadowJar, replace the jar lines with the appropriate task:
                 //   jar.set(tasks.shadowJar.flatMap { it.archiveFile })

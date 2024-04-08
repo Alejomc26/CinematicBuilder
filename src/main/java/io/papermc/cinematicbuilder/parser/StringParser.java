@@ -9,8 +9,8 @@ import java.util.List;
 
 public class StringParser {
 
-    public static void addString(String string) {
-        File file = new File(CinematicBuilder.getInstance().getDataFolder(), "names.yml");
+    public static void addString(CinematicBuilder main, String string) {
+        File file = new File(main.getDataFolder(), "names.yml");
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
@@ -27,8 +27,8 @@ public class StringParser {
         }
     }
 
-    public static void removeString(String string) {
-        File file = new File(CinematicBuilder.getInstance().getDataFolder(), "names.yml");
+    public static void removeString(CinematicBuilder main, String string) {
+        File file = new File(main.getDataFolder(), "names.yml");
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
@@ -45,8 +45,8 @@ public class StringParser {
         }
     }
 
-    public static String[] deserializeStrings() {
-        File file = new File(CinematicBuilder.getInstance().getDataFolder(), "names.yml");
+    public static String[] deserializeStrings(CinematicBuilder main) {
+        File file = new File(main.getDataFolder(), "names.yml");
 
         if (!file.exists()) {
             return new String[0];
